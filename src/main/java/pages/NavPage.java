@@ -3,34 +3,23 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NavPage extends BasePage {
     public NavPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
-    //Nav Page
-    //Home link
-    //About link
-    //My profile link
-    //Admin dugme
-    //Cities link iz padajuceg Admin menija
-    //Users link iz padajuceg Admin menija
-    //Sign up dugme
-    //Login dugme
-    //Logout dugme
-    //Dugme za izbor jezika
-    //EN dugme iz padajuceg menija za izbor jezika
-    //ES dugme iz padajuceg menija za izbor jezika
-    //FR dugme iz padajuceg menija za izbor jezika
-    //CN dugme iz padajuceg menija za izbor jezika
+
 
     public WebElement getHomeLink(){
         return driver.findElement(By.linkText("HOME"));
     }
     public WebElement getAboutLink(){
         return driver.findElement(By.linkText("ABOUT"));
+    }
+    public WebElement getLoginLink(){
+        return driver.findElement(By.linkText("LOGIN"));
     }
     public WebElement getMyProfile(){
         return driver.findElement(By.linkText("MY PROFILE"));
@@ -39,7 +28,7 @@ public class NavPage extends BasePage {
         return driver.findElement(By.xpath("//*[contains(@class, 'btnAdmin')]"));
     }
     public WebElement getCitiesLink(){
-        return driver.findElement(By.id("list-item-142"));
+        return driver.findElement(By.linkText("Cities"));
     }
     public WebElement getUsersLink(){
         return driver.findElement(By.id("list-item-145"));
@@ -50,9 +39,13 @@ public class NavPage extends BasePage {
     public WebElement getLoginButton(){
         return driver.findElement(By.xpath("//*[contains(@class, 'btnLogin')]"));
     }
-    public WebElement getSignOutButon(){
-        return driver.findElement(By.xpath("//*[contains(@class, 'btnLogout')]"));
+    public WebElement getLogoutButton() {
+        return this.driver.findElement(By.xpath("//*[contains(@class, 'btnLogout')]"));
     }
+    public void visibilityOfLogoutButton(){
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.className("btnLogout"))));
+    }
+
     public WebElement getLanguageButton(){
         return driver.findElement(By.xpath(
                 "//div[@class='v-toolbar__items']/button[contains(@class, 'btnLocaleActivation')]"));
@@ -71,4 +64,8 @@ public class NavPage extends BasePage {
         return driver.findElement(By.xpath("//*[contains(@class, 'btnCN')]"));
     }
 
+
+    public WebElement getLandingPageHeading(){
+        return driver.findElement(By.tagName("h1"));
+    }
 }

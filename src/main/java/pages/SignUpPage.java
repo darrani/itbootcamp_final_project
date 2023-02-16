@@ -9,11 +9,13 @@ public class SignUpPage extends BasePage{
     public SignUpPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
-//Polje za unos imena
-//Polje za unos emaila
-//Polje za unos lozinke
-//Polje za potvrdi lozinku
-//Sign me up dugme
+//    Signup Page
+//    Polje za unos imena
+//    Polje za unos emaila
+//    Polje za unos lozinke
+//    Polje za potvrdi lozinku
+//    Sign me up dugme
+
 
     public WebElement getFieldNameInput(){
         return driver.findElement(By.id("name"));
@@ -28,7 +30,7 @@ public class SignUpPage extends BasePage{
         return driver.findElement(By.id("confirmPassword"));
 
     }
-    public WebElement getSignUpButton(){
-        return driver.findElement(By.xpath("//a[@href='/signup']"));
+    public WebElement getSignMeUpButton(){
+        return driver.findElement(By.xpath("//*[@type='submit']"));
     }
 }

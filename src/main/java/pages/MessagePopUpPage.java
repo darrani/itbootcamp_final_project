@@ -12,28 +12,36 @@ public class MessagePopUpPage extends BasePage {
     }
 
 
-//metodu koja ceka da pop up bude vidljiv
-//Elemente koji u sebi sadrze tekstove poruke
-//Close dugme
-//metodu koja ceka da se verify your account dijalog pojavi
-//metodu koja vraca zaglavlje iz verify your account dijaloga koji sadrzi tekst IMPORTANT: Verify your account
-//
-//Close dugme iz verify account dijaloga
 
     public void waitForPopUpMessageToBeVisible() {
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.className("v-snack__content"))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("v-snack__content")));
     }
 
     public WebElement getTextFromDialogue() {
+        return driver.findElement(By.xpath("//div[@class='v-snack__content']/ul/li"));
+    }
+
+    public WebElement getCloseButtonFromDialog(){
+        return driver.findElement(By.xpath("//*[contains(@class,'btnClose')]"));
+    }
+
+    public void waitUntilVerifyYourAccountDialogIsVisible() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//div[]contains(@class, 'v-dialog--active)]")));
+    }
+    public WebElement getVerifyYourAccountHeader(){
         return driver.findElement(By.className("v-card__title"));
     }
-
-    public WebElement getCloseButton() {
-        return driver.findElement(By.xpath("//*[contains(text(), 'Close')]"));
+    public WebElement getVerifyYourAccountCloseButton(){
+        return driver.findElement(By.xpath("//*[contains(@class, 'v-card_actions')]/button"));
     }
 
-    public void waitForVerifyYourAccountToBeVisible() {
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.className("v-card__title"))));
+    public void waitForSuccessDialog(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("success")));
+    }
+
+    public WebElement getSuccessMessage(){
+        return driver.findElement(By.xpath("//*[contains(@class,'success')]/div"));
     }
 }
 

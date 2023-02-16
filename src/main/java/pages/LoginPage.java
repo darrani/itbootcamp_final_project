@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage{
-//    Polje za unos email-a
-//Polje za unos lozinke
-//Dugme za login.
+
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -18,11 +16,12 @@ public class LoginPage extends BasePage{
     public WebElement getPasswordInput(){
         return driver.findElement(By.id("password"));
     }
-    public WebElement getLoginButton(){
+    public WebElement getLoginButtonLink(){
         return driver.findElement(By.xpath("//div/a[3]"));
     }
-    public WebElement getPopUpMessage(){
-        return driver.findElement(By.xpath("//*[@role='status']"));
+    public WebElement getLoginButton(){
+        return driver.findElement(By.xpath("//form/div/div[3]/button"));
     }
+
 
 }
