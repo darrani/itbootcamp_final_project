@@ -18,14 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-
-//Osnovna klasa koju svaki test da nasledjuje. Ova klasa treba da ima:
-//        baseUrl - url stranice https://vue-demo.daniel-avellaneda.com
-//        beforeClass - gde se podesava drajver sa implicitnim cekanjem i cekanjem za ucitavanje stranice i
-//        kreiraju svi pagevi potrebni za testiranje
-//        aftterClass - gde se gasi drajver
-//        beforeMethod - gde se pre svakog testa ucitava baseUrl stranica
-//        afterMethod - gde se kreira screenshot stranice u slucaju da test ne prodje.
+import java.util.Date;
 
 
 public abstract class BasicTest {
@@ -38,7 +31,6 @@ public abstract class BasicTest {
 
         protected MessagePopUpPage messagePopUpPage;
        protected CitiesPage citiesPage;
-
 
         @BeforeClass
         public  void setup(){
@@ -65,20 +57,19 @@ public abstract class BasicTest {
         public void afterMethod(){
 
         }
-//        screenshot stranice
-//        @AfterMethod
-//        public void afterMethod(ITestResult result) throws IOException {
-//            //and does not overwrite screenshots if multiple tests fail
-//            if(result.getStatus()==ITestResult.FAILURE){
-//                File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//
-//                String timestamp = new SimpleDateFormat("dd-MM-yyyy__hh-mm-ss").format(newDate());
-//                Files.copy(file.toPath(),new File("screenshots/"+result.getName()+ "-"+ timestamp + ".png").toPath());
-//            }
-//
-//
-//
-//        }
+
+        @AfterMethod
+        public void afterMethod(ITestResult result) throws IOException {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String timestamp = new SimpleDateFormat(
+                    "dd-MM-yyyy__hh-mm-ss")
+                    .format(new Date());
+            Files.copy(file.toPath(), new File(
+                    "screenshots/" + result.getName() + " - " + timestamp + ".png")
+                    .toPath());
+        }
+    }
 
 
     @AfterClass
